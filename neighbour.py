@@ -24,7 +24,7 @@ match=np.zeros(N)
 #find distance between x coordinates
 for a in range(N):
     for b in range(N):
-        s[a,b]=0.
+        s[a, b] = 0.
         offx=0.
         #checks x(a) <= 0.25
         if (pos[0,a]<=0.25):
@@ -36,27 +36,8 @@ for a in range(N):
             if (pos[0,b]<=0.25):
                 #means loop around
                 offx=-1
-        #distance between points add x
-        s[a,b]=s[a,b]+(pos[0,a]-pos[0,b]+offx)**2
-#
-#find distance between y coordinates
-for a in range(N):
-    for b in range(N):
-        offy=0.
-        #loops around
-        if (pos[1,a]<=0.25):
-            if (pos[1,b]>=0.75):
-                offy=1
-        #doesn't loop around
-        if (pos[1,a]>=0.75):
-            if (pos[1,b]<=0.25):
-                offy=-1
-        #distance between points add y
-        s[a,b]=s[a,b]+(pos[1,a]-pos[1,b]+offy)**2
-#
-#find distance between z coordinates
-for a in range(N):
-    for b in range(N):
+
+        #looking at z coords
         offz=0.
         #loops around
         if (pos[2,a]<=0.25):
@@ -66,8 +47,20 @@ for a in range(N):
         if (pos[2,a]>=0.75):
             if (pos[2,b]<=0.25):
                 offz=-1
-        #distance between points add z
-        s[a,b]=s[a,b]+(pos[2,a]-pos[2,b]+offz)**2
+
+        #looking at y coords
+        offy=0.
+        #loops around
+        if (pos[1,a]<=0.25):
+            if (pos[1,b]>=0.75):
+                offy=1
+        #doesn't loop around
+        if (pos[1,a]>=0.75):
+            if (pos[1,b]<=0.25):
+                offy=-1
+
+        #calculating distance between points
+        s[a,b]=(pos[0,a]-pos[0,b]+offx)**2+(pos[1,a]-pos[1,b]+offy)**2 + (pos[2,a]-pos[2,b]+offz)**2
         s[a,b]=np.sqrt(s[a,b])
 #
 #find the smallest distance
