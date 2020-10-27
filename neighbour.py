@@ -24,7 +24,7 @@ match=np.zeros(N)
 #find distance between x coordinates
 for a in range(N):
     for b in range(N):
-        s[a, b] = 0.
+        dist = 0.
         offx=0.
         #checks x(a) <= 0.25
         if (pos[0,a]<=0.25):
@@ -60,9 +60,20 @@ for a in range(N):
                 offy=-1
 
         #calculating distance between points
-        s[a,b]=(pos[0,a]-pos[0,b]+offx)**2+(pos[1,a]-pos[1,b]+offy)**2 + (pos[2,a]-pos[2,b]+offz)**2
-        s[a,b]=np.sqrt(s[a,b])
-#
+        dist = (pos[0,a]-pos[0,b]+offx)**2+(pos[1,a]-pos[1,b]+offy)**2 + (pos[2,a]-pos[2,b]+offz)**2
+        dist = np.sqrt(s[a,b])
+
+        #find the smallest distance
+        mindist=1e10 #initial big value to compare
+
+        if (a!=b):
+            #compares min value so far and distance for particular point
+            mindist=np.minimum(dist, mindist)
+            match[a]=0
+            #assign new min distance if needed
+            if (mindist==dist):
+                match[a]=b
+"""#
 #find the smallest distance
 for a in range(N):
     mindist=1e10 #initial big value to compare
@@ -74,7 +85,7 @@ for a in range(N):
             #assign new min distance if needed
             if (mindist==s[a,c]):
                 match[a]=c
-
+"""
 end_time=time.time() #toc
 print('Elapsed time = ',repr(end_time-start_time))
 
