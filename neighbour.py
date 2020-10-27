@@ -67,25 +67,13 @@ for a in range(N):
         mindist=1e10 #initial big value to compare
 
         if (a!=b):
-            #compares min value so far and distance for particular point
+            #compares min value so far and distance for particular points
             mindist=np.minimum(dist, mindist)
             match[a]=0
             #assign new min distance if needed
             if (mindist==dist):
                 match[a]=b
-"""#
-#find the smallest distance
-for a in range(N):
-    mindist=1e10 #initial big value to compare
-    match[a]=0
-    for c in range(N):
-        if (a!=c):
-            #compares min value so far and distance for particular point
-            mindist=np.minimum(s[a,c],mindist)
-            #assign new min distance if needed
-            if (mindist==s[a,c]):
-                match[a]=c
-"""
+
 end_time=time.time() #toc
 print('Elapsed time = ',repr(end_time-start_time))
 
