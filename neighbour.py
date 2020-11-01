@@ -32,9 +32,10 @@ def find_nearest_neghbour(N):
         distance = np.abs(pos - pos[:, a].reshape(3, 1))
         #take the fact that space loops around into account
         distance = np.where(distance < 0.5, distance, distance - 1)
+        distance[:, a] = 1
         #find total ditance squared with pythagoras and sort the array
         #sort array with distances to get corresponding indecies and store smallest distance
-        match[a] = np.argsort(np.add.reduce(distance**2, axis=0))[1]
+        match[a] = np.argmin(np.add.reduce(distance**2, axis=0))
 
     return match
 
