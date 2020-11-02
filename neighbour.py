@@ -18,11 +18,6 @@ start_time=time.time()
 # deliberately slow code to find nearest neighbours within periodic unit cube
 #
 #  You may only change the code in this cell (i.e. between here and "toc")
-"""@jit(nopython=True)
-def choose_vals(sq_dist, a):
-    val = np.argsort(sq_dist)[1]
-    return val"""
-
 def find_nearest_neghbour(N):
     #array to store nearest neighbours
     match=np.zeros(N)
@@ -33,9 +28,8 @@ def find_nearest_neghbour(N):
         #take the fact that space loops around into account
         distance = np.where(distance < 0.5, distance, distance - 1)
         distance[:, a] = 1
-        #find total ditance squared with pythagoras and sort the array
-        #sort array with distances to get corresponding indecies and store smallest distance
-        match[a] = np.argmin(np.add.reduce(distance**2, axis=0))
+        #find total ditance squared with pythagoras and find smallest one
+        match[a] = np.argmin(np.sum(distance**2, axis=0))
 
     return match
 
